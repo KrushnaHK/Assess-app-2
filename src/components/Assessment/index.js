@@ -39,6 +39,13 @@ class Assessment extends Component {
     const response = await fetch(url, options)
     if (response.ok === true) {
       const data = await response.json()
+      const updatedData = data.questions.map(eachQuestion => ({
+        id: eachQuestion.id,
+        options: eachQuestion.options,
+        // How to update the option on the basis of option type
+        optionType: eachQuestion.option_type,
+        questionText: eachQuestion.question_text,
+      }))
 
       this.setState({
         questionList: data,
